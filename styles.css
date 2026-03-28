@@ -1,0 +1,1008 @@
+/* =====================================================
+   VOID.DEV — Portfolio Stylesheet
+   Sections:
+     01. CSS Variables (Design Tokens)
+     02. Reset & Base
+     03. Custom Cursor
+     04. Loading Screen
+     05. Noise Overlay
+     06. Background Canvas
+     07. Navigation
+     08. Section Base
+     09. Scroll Reveal Animations
+     10. Hero Section
+     11. About Section
+     12. Skills Section
+     13. Projects Section
+     14. Contact Section
+     15. Footer
+     16. Responsive Breakpoints
+===================================================== */
+
+
+
+/* ─────────────────────────────────────────────────
+   01. CSS VARIABLES — Design Tokens
+───────────────────────────────────────────────── */
+:root {
+  --bg:     #03030a;
+  --bg2:    #06060f;
+  --cyan:   #00e5ff;
+  --purple: #aa00ff;
+  --pink:   #ff006e;
+  --white:  #f0f0ff;
+  --muted:  #3a3a5c;
+  --muted2: #666688;
+  --card:   rgba(10, 10, 30, 0.85);
+  --border: rgba(0, 229, 255, 0.1);
+}
+
+
+/* ─────────────────────────────────────────────────
+   02. RESET & BASE
+───────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: 'Syne', sans-serif;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+
+/* ─────────────────────────────────────────────────
+   03. CUSTOM CURSOR
+───────────────────────────────────────────────── */
+.c-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--cyan);
+  border-radius: 50%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s, height 0.2s, background 0.2s;
+}
+
+.c-ring {
+  width: 36px;
+  height: 36px;
+  border: 1.5px solid rgba(0, 229, 255, 0.55);
+  border-radius: 50%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+}
+
+.c-glow {
+  width: 180px;
+  height: 180px;
+  background: radial-gradient(circle, rgba(0, 229, 255, 0.055) 0%, transparent 70%);
+  border-radius: 50%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9997;
+  transform: translate(-50%, -50%);
+}
+
+/* Hover state — expands and shifts to purple */
+body.hov .c-dot  { width: 10px; height: 10px; background: var(--purple); }
+body.hov .c-ring { width: 60px; height: 60px; border-color: rgba(170, 0, 255, 0.5); }
+
+
+/* ─────────────────────────────────────────────────
+   04. LOADING SCREEN
+───────────────────────────────────────────────── */
+#loader {
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+}
+
+.ld-logo {
+  font-family: 'Orbitron', monospace;
+  font-size: clamp(2rem, 6vw, 3.8rem);
+  font-weight: 900;
+  letter-spacing: 0.18em;
+}
+
+.ld-logo em {
+  font-style: normal;
+  color: var(--cyan);
+}
+
+.ld-wrap {
+  width: 280px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.ld-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--purple), var(--cyan));
+  box-shadow: 0 0 14px var(--cyan);
+  transition: width 0.05s linear;
+}
+
+.ld-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.78rem;
+  color: var(--muted2);
+  letter-spacing: 0.25em;
+}
+
+.ld-status {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem;
+  color: var(--cyan);
+  letter-spacing: 0.18em;
+  opacity: 0.7;
+}
+
+
+/* ─────────────────────────────────────────────────
+   05. NOISE OVERLAY
+───────────────────────────────────────────────── */
+.noise {
+  position: fixed;
+  inset: 0;
+  z-index: 9996;
+  pointer-events: none;
+  opacity: 0.022;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+
+/* ─────────────────────────────────────────────────
+   06. BACKGROUND CANVAS (Grid)
+───────────────────────────────────────────────── */
+#bg-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.4;
+}
+
+
+/* ─────────────────────────────────────────────────
+   07. NAVIGATION
+───────────────────────────────────────────────── */
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: 18px 6%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  backdrop-filter: blur(22px);
+  background: rgba(3, 3, 10, 0.55);
+  border-bottom: 1px solid var(--border);
+  transform: translateY(-100%);
+  transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+nav.show {
+  transform: translateY(0);
+}
+
+.nav-logo {
+  font-family: 'Orbitron', monospace;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  color: var(--white);
+  text-decoration: none;
+}
+
+.nav-logo em {
+  font-style: normal;
+  color: var(--cyan);
+}
+
+.nav-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--muted2);
+  text-decoration: none;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  transition: color 0.3s;
+  position: relative;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--cyan);
+  transition: width 0.3s;
+}
+
+.nav-links a:hover           { color: var(--cyan); }
+.nav-links a:hover::after    { width: 100%; }
+
+
+/* ─────────────────────────────────────────────────
+   08. SECTION BASE
+───────────────────────────────────────────────── */
+section {
+  /* position: relative;
+  z-index: 1;
+  padding: 110px 8%;
+  
+  Remove It  */
+
+  position: relative;
+  z-index: 1;
+  padding: 110px 8%;
+}
+
+.sec-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem;
+  color: var(--cyan);
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sec-label::before {
+  content: '';
+  width: 36px;
+  height: 1px;
+  background: var(--cyan);
+}
+
+.sec-title {
+  font-family: 'Orbitron', monospace;
+  font-size: clamp(2rem, 4.5vw, 3.4rem);
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 60px;
+}
+
+.sec-title .accent { color: var(--cyan); }
+
+
+/* ─────────────────────────────────────────────────
+   09. SCROLL REVEAL ANIMATIONS
+───────────────────────────────────────────────── */
+.rev {
+  opacity: 0;
+  transform: translateY(48px);
+  transition:
+    opacity   0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.rev.on {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.rev-l {
+  opacity: 0;
+  transform: translateX(-56px);
+  transition:
+    opacity   0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.rev-l.on {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+
+/* ─────────────────────────────────────────────────
+   10. HERO SECTION
+───────────────────────────────────────────────── */
+#hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 0 8%;
+  padding-top: 90px;
+}
+
+.hero-left {
+  max-width: 760px;
+  flex: 1;
+}
+
+/* Availability Tag */
+.hero-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--cyan);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  margin-bottom: 22px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.7s, transform 0.7s;
+}
+
+.hero-tag .dot {
+  width: 6px;
+  height: 6px;
+  background: var(--cyan);
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%,  100% { box-shadow: 0 0 0 0   rgba(0, 229, 255, 0.5); }
+  50%        { box-shadow: 0 0 0 8px rgba(0, 229, 255, 0);   }
+}
+
+/* Name */
+.hero-name {
+  font-family: 'Orbitron', monospace;
+  font-size: clamp(3.2rem, 9vw, 8rem);
+  font-weight: 900;
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+  background: linear-gradient(135deg, #fff 30%, var(--cyan) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1s 0.18s, transform 1s 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Role Typewriter */
+.hero-role {
+  font-size: clamp(1rem, 2.4vw, 1.4rem);
+  font-weight: 300;
+  color: rgba(240, 240, 255, 0.42);
+  margin-bottom: 30px;
+  min-height: 2.2em;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s 0.38s, transform 0.8s 0.38s;
+}
+
+.hero-role .typed { color: var(--white); }
+
+.blink {
+  display: inline-block;
+  width: 2px;
+  height: 0.9em;
+  background: var(--cyan);
+  margin-left: 2px;
+  animation: blk 0.75s infinite;
+  vertical-align: middle;
+}
+
+@keyframes blk {
+  0%,  100% { opacity: 1; }
+  50%        { opacity: 0; }
+}
+
+/* Description */
+.hero-desc {
+  font-size: 0.98rem;
+  color: rgba(240, 240, 255, 0.38);
+  max-width: 460px;
+  line-height: 1.85;
+  margin-bottom: 44px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s 0.5s, transform 0.8s 0.5s;
+}
+
+/* CTA Buttons */
+.hero-cta {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.8s 0.62s, transform 0.8s 0.62s;
+}
+
+/* Reveal trigger classes */
+.hero-name.on,
+.hero-tag.on,
+.hero-role.on,
+.hero-desc.on,
+.hero-cta.on {
+  opacity: 1;
+  transform: none;
+}
+
+/* Primary Button */
+.btn-p {
+  padding: 13px 34px;
+  background: transparent;
+  border: 1px solid var(--cyan);
+  color: var(--cyan);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.76rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  transition: color 0.4s;
+}
+
+.btn-p::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--cyan);
+  transform: translateX(-101%);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: -1;
+}
+
+.btn-p:hover           { color: var(--bg); }
+.btn-p:hover::before   { transform: translateX(0); }
+
+/* Secondary Button */
+.btn-s {
+  padding: 13px 34px;
+  background: transparent;
+  border: 1px solid var(--muted);
+  color: var(--muted2);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.76rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: border-color 0.3s, color 0.3s;
+}
+
+.btn-s:hover {
+  border-color: rgba(240, 240, 255, 0.4);
+  color: var(--white);
+}
+
+/* 3D Orb Container */
+
+.hero-right {
+  
+  /* position: absolute;
+  right: 6%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: clamp(220px, 32vw, 480px);
+  aspect-ratio: 1;
+  opacity: 0;
+  transition: opacity 1.2s 0.8s; 
+  
+  Remove It  */ 
+
+  position: fixed; /* Stays in place while scrolling */
+  inset: 0;       /* Fills the whole screen */
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;    /* Moves it behind your text */
+  pointer-events: none; /* Allows you to click buttons 'through' the orb */
+  opacity: 0;
+  transition: opacity 1.2s 0.8s;
+  transform: none !important; /* Remove the old centering transform */
+}
+
+.hero-right.on { opacity: 1; }
+
+#orb-canvas {
+  /* width: 100%;
+  height: 100%; 
+  
+  Remove It  */
+
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+
+/* Scroll Indicator */
+.scroll-hint {
+  position: absolute;
+  bottom: 36px;
+  left: 8%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.scroll-hint span {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  color: var(--muted);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  writing-mode: vertical-rl;
+}
+
+.scroll-hint .sline {
+  width: 1px;
+  height: 56px;
+  background: linear-gradient(180deg, var(--cyan), transparent);
+  animation: slin 2s ease-in-out infinite;
+}
+
+@keyframes slin {
+  0%,  100% { opacity: 0.25; transform: scaleY(0.25); transform-origin: top; }
+  50%        { opacity: 1;    transform: scaleY(1);    }
+}
+
+
+/* ─────────────────────────────────────────────────
+   11. ABOUT SECTION
+───────────────────────────────────────────────── */
+#about {
+  border-top: 1px solid var(--border);
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.about-txt {
+  font-size: 1rem;
+  line-height: 1.9;
+  color: rgba(240, 240, 255, 0.5);
+}
+
+.about-txt p     { margin-bottom: 20px; }
+.about-txt .hi   { color: var(--white); font-weight: 600; }
+
+/* Stats Grid */
+.stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+}
+
+.sc {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 26px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.35s;
+}
+
+.sc::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0, 229, 255, 0.04), transparent);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.sc:hover         { border-color: rgba(0, 229, 255, 0.28); }
+.sc:hover::before { opacity: 1; }
+
+.sc-num {
+  font-family: 'Orbitron', monospace;
+  font-size: 2.4rem;
+  font-weight: 900;
+  color: var(--cyan);
+  line-height: 1;
+  margin-bottom: 7px;
+}
+
+.sc-lbl {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.67rem;
+  color: var(--muted2);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+
+/* ─────────────────────────────────────────────────
+   12. SKILLS SECTION
+───────────────────────────────────────────────── */
+#skills {
+  border-top: 1px solid var(--border);
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 20px;
+}
+
+.sk-cat {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 30px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Left accent line on hover */
+.sk-cat::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 0;
+  background: linear-gradient(180deg, var(--cyan), var(--purple));
+  transition: height 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sk-cat:hover::after { height: 100%; }
+
+.sk-cat-title {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--cyan);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 22px;
+}
+
+.sk-item { margin-bottom: 14px; }
+
+.sk-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.sk-name { font-size: 0.84rem;  color: rgba(240, 240, 255, 0.65); }
+.sk-pct  { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--cyan); }
+
+.sk-bar {
+  height: 2px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.sk-fill {
+  height: 100%;
+  width: 0;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--purple), var(--cyan));
+  box-shadow: 0 0 8px var(--cyan);
+  transition: width 1.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+
+/* ─────────────────────────────────────────────────
+   13. PROJECTS SECTION
+───────────────────────────────────────────────── */
+#projects {
+  border-top: 1px solid var(--border);
+}
+
+.proj-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+  gap: 2px;
+}
+
+.proj-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 38px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color 0.35s;
+}
+
+.proj-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 229, 255, 0.04),
+    rgba(170, 0, 255, 0.04)
+  );
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.proj-card:hover         { border-color: rgba(0, 229, 255, 0.25); }
+.proj-card:hover::before { opacity: 1; }
+
+.proj-num {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.6rem;
+  color: var(--muted2);
+  letter-spacing: 0.3em;
+  margin-bottom: 18px;
+}
+
+.proj-arrow {
+  position: absolute;
+  top: 38px;
+  right: 38px;
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted2);
+  font-size: 1.1rem;
+  transition: all 0.35s;
+}
+
+.proj-card:hover .proj-arrow {
+  background: var(--cyan);
+  border-color: var(--cyan);
+  color: var(--bg);
+  transform: rotate(45deg);
+}
+
+.proj-title {
+  font-family: 'Orbitron', monospace;
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 14px;
+  transition: color 0.3s;
+}
+
+.proj-card:hover .proj-title { color: var(--cyan); }
+
+.proj-desc {
+  font-size: 0.88rem;
+  color: rgba(240, 240, 255, 0.4);
+  line-height: 1.75;
+  margin-bottom: 24px;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.tag {
+  padding: 3px 11px;
+  background: rgba(0, 229, 255, 0.05);
+  border: 1px solid rgba(0, 229, 255, 0.18);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  color: var(--cyan);
+  letter-spacing: 0.08em;
+}
+
+
+/* ─────────────────────────────────────────────────
+   14. CONTACT SECTION
+───────────────────────────────────────────────── */
+#contact {
+  border-top: 1px solid var(--border);
+}
+
+.contact-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.ct-head {
+  font-family: 'Orbitron', monospace;
+  font-size: clamp(1.9rem, 4vw, 3rem);
+  font-weight: 700;
+  line-height: 1.15;
+  margin-bottom: 22px;
+}
+
+.ct-head .accent { color: var(--cyan); }
+
+.ct-sub {
+  color: rgba(240, 240, 255, 0.4);
+  line-height: 1.8;
+  margin-bottom: 36px;
+  font-size: 0.95rem;
+}
+
+.ct-links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ct-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.78rem;
+  color: rgba(240, 240, 255, 0.45);
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  transition: color 0.3s;
+}
+
+.ct-link:hover { color: var(--cyan); }
+.ct-link em    { font-style: normal; color: var(--cyan); }
+
+/* Contact Form */
+.cf {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.cf input,
+.cf textarea {
+  width: 100%;
+  background: rgba(6, 6, 15, 0.85);
+  border: 1px solid var(--border);
+  padding: 15px 18px;
+  font-family: 'Syne', sans-serif;
+  font-size: 0.88rem;
+  color: var(--white);
+  outline: none;
+  resize: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.cf textarea { height: 120px; }
+
+.cf input:focus,
+.cf textarea:focus {
+  border-color: rgba(0, 229, 255, 0.38);
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.05);
+}
+
+.cf input::placeholder,
+.cf textarea::placeholder {
+  color: var(--muted2);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+}
+
+.btn-sub {
+  padding: 15px 38px;
+  background: linear-gradient(135deg, var(--purple), var(--cyan));
+  border: none;
+  color: var(--bg);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 700;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: transform 0.2s, box-shadow 0.3s;
+}
+
+.btn-sub:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0, 229, 255, 0.2);
+}
+
+
+/* ─────────────────────────────────────────────────
+   15. FOOTER
+───────────────────────────────────────────────── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 28px 8%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  z-index: 1;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.f-logo {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: 0.22em;
+}
+
+.f-logo em { font-style: normal; color: var(--cyan); }
+
+.f-copy {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem;
+  color: var(--muted2);
+  letter-spacing: 0.1em;
+}
+
+.f-socials {
+  display: flex;
+  gap: 10px;
+}
+
+.f-soc {
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted2);
+  font-size: 0.72rem;
+  text-decoration: none;
+  font-family: 'DM Mono', monospace;
+  transition: all 0.3s;
+}
+
+.f-soc:hover {
+  border-color: var(--cyan);
+  color: var(--cyan);
+  background: rgba(0, 229, 255, 0.06);
+}
+
+
+/* ─────────────────────────────────────────────────
+   16. RESPONSIVE BREAKPOINTS
+───────────────────────────────────────────────── */
+@media (max-width: 960px) {
+  .about-grid,
+  .contact-wrap  { grid-template-columns: 1fr; gap: 48px; }
+  .hero-right    { display: none; }
+}
+
+@media (max-width: 640px) {
+  section        { padding: 80px 5%; }
+  .nav-links     { display: none; }
+  .stats         { grid-template-columns: 1fr 1fr; }
+}
