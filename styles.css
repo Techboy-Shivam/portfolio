@@ -266,16 +266,17 @@ nav.show {
    08. SECTION BASE
 ───────────────────────────────────────────────── */
 section {
-  /* position: relative;
-  z-index: 1;
-  padding: 110px 8%;
-  
-  Remove It  */
-
   position: relative;
   z-index: 1;
   padding: 110px 8%;
 }
+  /*
+ Remove hua hai
+
+  position: relative;
+  z-index: 1;
+  padding: 110px 8%;
+}*/
 
 .sec-label {
   font-family: 'DM Mono', monospace;
@@ -512,7 +513,7 @@ section {
 
 .hero-right {
   
-  /* position: absolute;
+  position: absolute;
   right: 6%;
   top: 50%;
   transform: translateY(-50%);
@@ -520,35 +521,39 @@ section {
   aspect-ratio: 1;
   opacity: 0;
   transition: opacity 1.2s 0.8s; 
-  
-  Remove It  */ 
+} 
+  /* 
 
-  position: fixed; /* Stays in place while scrolling */
-  inset: 0;       /* Fills the whole screen */
+Remove Hua hhai
+
+  position: fixed; // Stays in place while scrolling 
+  inset: 0;       // Fills the whole screen 
   width: 100vw;
   height: 100vh;
-  z-index: -1;    /* Moves it behind your text */
-  pointer-events: none; /* Allows you to click buttons 'through' the orb */
+  z-index: -1;    // Moves it behind your text 
+  pointer-events: none; // Allows you to click buttons 'through' the orb 
   opacity: 0;
   transition: opacity 1.2s 0.8s;
-  transform: none !important; /* Remove the old centering transform */
-}
+  transform: none !important; // Remove the old centering transform 
+}*/
 
 .hero-right.on { opacity: 1; }
 
 #orb-canvas {
-  /* width: 100%;
+   width: 100%;
   height: 100%; 
-  
-  Remove It  */
+}
+  /*
+
+Remove hua hai
 
   width: 100% !important;
   height: 100% !important;
   display: block;
-}
+}*/
 
 /* Scroll Indicator */
-.scroll-hint {
+.scroll-hint  {
   position: absolute;
   bottom: 36px;
   left: 8%;
