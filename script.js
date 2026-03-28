@@ -408,6 +408,7 @@ document.querySelectorAll('.proj-card').forEach((card) => {
 //Bramhand Ko Kone me krne ke liye Hatao ise down wwale ko
 
 // 1. Global mouse tracking
+/*
 const mouse = { x: 0, y: 0 };
 const target = { x: 0, y: 0 };
 
@@ -446,3 +447,4 @@ window.addEventListener('resize', () => {
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
 });
+*/
