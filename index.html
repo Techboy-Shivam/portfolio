@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VOID.DEV — Full Stack Developer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Syne:wght@300;400;500;600;700&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Syne:wght@300;400;500;600;700&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <div class="noise"></div>
+  <div class="c-dot"  id="cDot"></div>
+  <div class="c-ring" id="cRing"></div>
+  <div class="c-glow" id="cGlow"></div>
+
+  <!-- ═══ LOADER ═══════════════════════════════ -->
+  <div id="loader">
+    <div class="ld-logo">VOID<em>.</em>DEV</div>
+    <div class="ld-wrap"><div class="ld-bar" id="ldBar"></div></div>
+    <div class="ld-num" id="ldNum">000</div>
+    <div class="ld-status" id="ldSt">initializing systems...</div>
+  </div>
+
+  <!-- Grid bg canvas -->
+  <canvas id="bg-canvas"></canvas>
+
+  <!-- ═══ NAV ═══════════════════════════════════ -->
+  <nav id="main-nav">
+    <a href="#" class="nav-logo">VOID<em>.</em>DEV</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- ═══ HERO ══════════════════════════════════ -->
+  <section id="hero">
+    <div class="hero-left">
+      <div class="hero-tag" id="hTag"><div class="dot"></div> Available for Work — 2025</div>
+      <h1 class="hero-name" id="hName">SHIVAM<br>SINGH</h1>
+      <p class="hero-role" id="hRole">
+        <span class="typed" id="typedTxt"></span><span class="blink"></span>
+      </p>
+      <p class="hero-desc" id="hDesc">
+        Crafting digital experiences at the intersection of design and engineering. Building products that push the limits of what's possible on the web.
+      </p>
+      <div class="hero-cta" id="hCta">
+        <a href="#projects" class="btn-p">View My Work</a>
+        <a href="#contact"  class="btn-s">Get In Touch</a>
+      </div>
+    </div>
+
+    <div class="hero-right" id="hOrb">
+      <canvas id="orb-canvas"></canvas>
+    </div>
+
+    <div class="scroll-hint">
+      <span>scroll</span>
+      <div class="sline"></div>
+    </div>
+  </section>
+
+  <!-- ═══ ABOUT ═════════════════════════════════ -->
+  <section id="about">
+    <div class="sec-label rev">About ----</div>
+    <div class="about-grid">
+      
+      <div>
+        <h2 class="sec-title rev">Crafting the<br><span class="accent">Future</span><br>of Digital.</h2>
+        <div class="about-txt rev">
+          <p>I'm a <span class="hi">Full-Stack Developer &amp; Digital Architect</span> based in San Francisco, focused on building products that live at the bleeding edge of design and engineering.</p>
+          <p>My philosophy: every pixel is intentional, every interaction is earned. I don't build websites — I build <span class="hi">digital experiences</span> that people remember.</p>
+          <p>Currently open to freelance projects and full-time opportunities in product engineering.</p>
+        </div>
+      </div>
+      <div class="stats rev">
+        <div class="sc"><div class="sc-num">1 +</div><div class="sc-lbl">Years Experience</div></div>
+        <div class="sc"><div class="sc-num">10</div><div class="sc-lbl">Projects Shipped</div></div>
+        <div class="sc"><div class="sc-num">5</div><div class="sc-lbl">Happy Clients</div></div>
+        <div class="sc"><div class="sc-num">12</div><div class="sc-lbl">Awards Won</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ SKILLS ════════════════════════════════ -->
+  <section id="skills">
+    <div class="sec-label rev">Skills ----</div>
+    <h2 class="sec-title rev">Technical<br><span class="accent">Arsenal</span></h2>
+    <div class="skills-grid">
+
+      <div class="sk-cat rev">
+        <div class="sk-cat-title">// Frontend</div>
+        <div class="sk-item"><div class="sk-info"><span class="sk-name">React / Next.js</span><span class="sk-pct">95%</span></div><div class="sk-bar"><div class="sk-fill" data-w="95"></div></div></div>
+        <div class="sk-item"><div class="sk-info"><span class="sk-name">HTML</span><span class="sk-pct">90%</span></div><div class="sk-bar"><div class="sk-fill" data-w="90"></div></div></div>
+        <div class="sk-item"><div class="sk-info"><span class="sk-name">CSS / Animations</span><span class="sk-pct">98%</span></div><div class="sk-bar"><div class="sk-fill" data-w="98"></div></div></div>
+        <div class="sk-item"><div class="sk-info"><span class="sk-name">JavaScript</span><span class="sk-pct">80%</span></div><div class="sk-bar"><div class="sk-fill" data-w="80"></div></div></div>
+      </div>
+
+      <div class="sk-cat rev">
+        <div class="sk-cat-title">// Backend</div>
+        <div class="sk-item"><div class="sk-info"><span class="sk-name">Node.js / Express</span><span class="sk-pct">92%</span></div><div class="sk-bar"><div class="sk-fill" data-w="92"></div></div></div>
+        <div class="sk-item"><div class="sk-info"><span class="sk-name">Python / Django</span><span class="sk-pct">85%</span></div><div class="sk-bar"><div class="sk-fill" data-w="85"></div></div></div>
+        <div class="sk-item"><div class="sk-info"><span class="sk-name">PostgreSQL</span><span class="sk-pct">88%</span></div><div class="sk-bar"><div class="sk-fill" data-w="88"></div></div></div>
+        <div class="sk-item"><div class="sk-info"><span class="sk-name">MongoDB</span><span class="sk-pct">82%</span></div><div class="sk-bar"><div class="sk-fill" data-w="82"></div></div></div>
+      </div>
+
+      <div class="sk-cat rev">
+        <div class="sk-cat-title">// Design & DevOps</div>
+        <div class="sk-item"><div class="sk-info"><span class="sk-name">Figma</span><span class="sk-pct">94%</span></div><div class="sk-bar"><div class="sk-fill" data-w="94"></div></div></div>
+        <div class="sk-item"><div class="sk-info"><span class="sk-name">GSAP / Framer Motion</span><span class="sk-pct">88%</span></div><div class="sk-bar"><div class="sk-fill" data-w="88"></div></div></div>
+        <div class="sk-item"><div class="sk-info"><span class="sk-name">AWS / Docker</span><span class="sk-pct">78%</span></div><div class="sk-bar"><div class="sk-fill" data-w="78"></div></div></div>
+        <div class="sk-item"><div class="sk-info"><span class="sk-name">CI/CD Pipelines</span><span class="sk-pct">83%</span></div><div class="sk-bar"><div class="sk-fill" data-w="83"></div></div></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══ PROJECTS ══════════════════════════════ -->
+  <section id="projects">
+    <div class="sec-label rev">Projects ----</div>
+    <h2 class="sec-title rev">Selected<br><span class="accent">Work</span></h2>
+    <div class="proj-grid">
+
+      <div class="proj-card rev">
+        <div class="proj-num">001</div>
+        <div class="proj-arrow">↗</div>
+        <h3 class="proj-title">NEXUS OS</h3>
+        <p class="proj-desc">An AI-powered workspace platform with real-time collaboration, neural task assignment, and predictive productivity analytics.</p>
+        <div class="tags"><span class="tag">Next.js</span><span class="tag">AI/ML</span><span class="tag">WebSockets</span><span class="tag">Postgres</span></div>
+      </div>
+
+      <div class="proj-card rev">
+        <div class="proj-num">002</div>
+        <div class="proj-arrow">↗</div>
+        <h3 class="proj-title">CIPHER UI</h3>
+        <p class="proj-desc">A next-gen design system and component library used by 3,000+ developers — advanced theming, dark mode, and A11y built-in.</p>
+        <div class="tags"><span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">Storybook</span><span class="tag">NPM</span></div>
+      </div>
+
+      <div class="proj-card rev">
+        <div class="proj-num">003</div>
+        <div class="proj-arrow">↗</div>
+        <h3 class="proj-title">ORBITAL</h3>
+        <p class="proj-desc">A 3D data visualization platform for space-tech startups, rendering live satellite telemetry in the browser via WebGL.</p>
+        <div class="tags"><span class="tag">Three.js</span><span class="tag">WebGL</span><span class="tag">D3.js</span><span class="tag">Python</span></div>
+      </div>
+
+      <div class="proj-card rev">
+        <div class="proj-num">004</div>
+        <div class="proj-arrow">↗</div>
+        <h3 class="proj-title">VOID CMS</h3>
+        <p class="proj-desc">A headless, API-first CMS built for performance — edge caching, customizable block editor, and real-time preview.</p>
+        <div class="tags"><span class="tag">Node.js</span><span class="tag">GraphQL</span><span class="tag">Redis</span><span class="tag">Docker</span></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══ CONTACT ═══════════════════════════════ -->
+  <section id="contact">
+    <div class="contact-wrap">
+      <div>
+        <div class="sec-label rev">Contact ----</div>
+        <h2 class="ct-head rev">Let's Build<br>Something<br><span class="accent">Extraordinary</span></h2>
+        <p class="ct-sub rev">Always open to discussing new projects, creative ideas, or opportunities to be part of your vision.</p>
+        <div class="ct-links rev">
+          <a href="2temp,ail0@gmail.com" class="ct-link"><em>→</em> shivam@void.dev</a>
+          <a href="https://github.com/Techboy-Shivam" class="ct-link"><em>→</em> github.com/Techboy-Shivam</a>
+          <a href="https://www.instagram.com/rajpoot_g_techboy" class="ct-link"><em>→</em> instagram.com/rajpoot_g_techboy/</a>
+          <a href="https://wa.me/9795596746" class="ct-link"><em>→</em>Get whatsapp</a>
+
+        </div>
+      </div>
+      <div class="cf rev">
+        <input  type="text"  placeholder="Your Name" />
+        <input  type="email" placeholder="your@email.com" />
+        <input  type="text"  placeholder="Project Type" />
+        <textarea placeholder="Tell me about your project..."></textarea>
+        <button class="btn-sub">Send Message →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ════════════════════════════════ -->
+  <footer>
+    <div class="f-logo">VOID<em>.</em>DEV</div>
+    <div class="f-copy">© 2025 — Designed &amp; built with obsession</div>
+    <div class="f-socials">
+      <a href="#" class="f-soc">GH</a>
+      <a href="#" class="f-soc">LN</a>
+      <a href="#" class="f-soc">TW</a>
+    </div>
+  </footer>
+
+<script src="script.js"></script>
+</body>
+</html>
