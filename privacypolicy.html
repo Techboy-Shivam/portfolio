@@ -11,7 +11,20 @@
             background-color: #f4f7f6; /* Change this to your cosmic background if preferred */
             margin: 0;
             padding: 0;
+            cursor: default; /* or 'auto' */
         }
+        /* Make cursor visible on interactive elements */
+a, button, input, select, textarea {
+    cursor: pointer;
+}
+
+.back-btn {
+    cursor: pointer;
+}
+
+.back-btn:hover {
+    cursor: pointer;
+}
 
         .policy-container {
             max-width: 900px;
@@ -24,6 +37,7 @@
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
         }
 
+        
         /* Title: Centered, Bold, and Large */
         .policy-container h1 { 
             font-size: 3.5rem; 
